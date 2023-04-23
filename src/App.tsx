@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
-
-import Input from 'antd/es/input/Input';
 import { Button, Checkbox, Col, Divider, List, Row } from 'antd';
+import Input from 'antd/es/input/Input';
+import { DeleteOutlined } from '@ant-design/icons';
 
 import { todo } from './store/todo';
-
-import { DeleteOutlined } from '@ant-design/icons'
 
 const App: React.FC<{ todo: typeof todo }> = observer(({ todo }) => {
   const [todoName, setTodoName] = useState('');
@@ -22,7 +20,14 @@ const App: React.FC<{ todo: typeof todo }> = observer(({ todo }) => {
           />
         </Col>
         <Col>
-          <Button onClick={() => todo.addTodo(todoName)}>add</Button>
+          <Button
+            onClick={() => {
+              todo.addTodo(todoName);
+              setTodoName('');
+            }}
+          >
+            add
+          </Button>
         </Col>
       </Row>
       <Divider orientation="left">Uncompleted todo:</Divider>

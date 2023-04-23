@@ -1,18 +1,11 @@
-import { action, computed, makeAutoObservable, makeObservable, observable } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 
-class Todo {
+export class Todo {
   things: { id: number; name: string; completed: boolean }[];
 
   constructor() {
     this.things = [];
-    makeObservable(this, {
-      things: observable,
-      addTodo: action,
-      removeTodo: action,
-      completeTodo: action,
-      completedTodo: computed,
-      uncompletedTodo: computed
-    });
+    makeAutoObservable(this);
   }
 
   addTodo(name: string) {
